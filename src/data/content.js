@@ -71,6 +71,7 @@ export const contact = {
 // Rezervácia raňajok (DEMO – zatiaľ sa nikam neodosiela).
 export const reservation = {
   title: 'Rezervácia raňajok',
+  minGuests: 2, // minimálny počet osôb na rezerváciu
   // Začiatky raňajok; každý čas má vlastnú kapacitu osôb. TODO: potvrdiť časy.
   slots: [
     { time: '7:00', capacity: 8 },

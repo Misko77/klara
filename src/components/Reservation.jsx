@@ -21,6 +21,7 @@ const emptyForm = {
   guests: '2',
 }
 
+const { minGuests } = reservation
 const maxGuests = Math.max(...reservation.slots.map((s) => s.capacity))
 
 function validate(form) {
@@ -103,7 +104,7 @@ export default function Reservation() {
         <div className="reservation__intro">
           <h2 className="section__title">{reservation.title}</h2>
           <p>
-            Rezervujte si stôl na raňajky. Vyberte dátum, čas a počet osôb – stôl vám pripravíme.
+            Rezervujte si stôl na raňajky. Vyberte dátum, čas a počet osôb (od {minGuests} osôb) – stôl vám pripravíme.
           </p>
           <p className="reservation__demo">
             Ukážka formulára – rezervácia sa zatiaľ nikam neodosiela.
@@ -153,7 +154,7 @@ export default function Reservation() {
           <div className="field">
             <label htmlFor="res-guests">Počet osôb</label>
             <select {...fieldProps('guests')}>
-              {Array.from({ length: maxGuests }, (_, i) => i + 1).map((n) => (
+              {Array.from({ length: maxGuests - minGuests + 1 }, (_, i) => i + minGuests).map((n) => (
                 <option key={n} value={n}>
                   {n}
                 </option>
