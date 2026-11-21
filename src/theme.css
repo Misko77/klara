@@ -646,3 +646,100 @@ img {
 .section--cream .reservation__done {
   background: var(--c-cream-light);
 }
+
+/* ===== Sobotné raňajky ===== */
+.breakfast {
+  max-width: 820px;
+  text-align: center;
+}
+
+.breakfast__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.85rem;
+  color: var(--c-brand);
+  margin: 0 0 8px;
+}
+
+.breakfast__intro {
+  max-width: 40rem;
+  margin: 0 auto 36px;
+}
+
+.breakfast a:not(.btn) {
+  color: var(--c-brand);
+}
+
+.breakfast__list {
+  list-style: none;
+  margin: 0 0 36px;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+  text-align: left;
+}
+
+.breakfast__item {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid rgb(131 63 42 / 0.15);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+}
+
+.breakfast__num {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--c-brand);
+  color: var(--c-cream);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+}
+
+.breakfast__item > div {
+  flex: 1;
+}
+
+.breakfast__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.breakfast__head h3 {
+  font-size: 1.35rem;
+  color: var(--c-brand);
+  margin: 0 0 4px;
+}
+
+.breakfast__price {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.breakfast__item p {
+  margin: 0;
+  color: var(--c-muted);
+}
+
+.breakfast__soon {
+  padding: 24px;
+  border: 1px dashed rgb(131 63 42 / 0.35);
+  border-radius: var(--radius);
+  margin: 0 0 36px;
+}
+
+.breakfast__meta {
+  margin: 0;
+}
+
+.breakfast__cta {
+  margin-top: 18px;
+}

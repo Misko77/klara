@@ -73,7 +73,7 @@ export const reservation = {
   title: 'Rezervácia raňajok',
   // Dni, kedy sa dá rezervovať (0 = nedeľa … 6 = sobota) a koľko termínov dopredu ponúknuť.
   weekdays: [6],
-  datesAhead: 8,
+  datesAhead: 1, // len najbližšia sobota
   minGuests: 2, // minimálny počet osôb na rezerváciu
   // Začiatky raňajok; každý čas má vlastnú kapacitu osôb. TODO: potvrdiť časy.
   slots: [
@@ -95,4 +95,18 @@ export const reservation = {
     { id: 'C3', seats: 2 },
     { id: 'C4', seats: 2 },
   ],
+}
+
+// Spoločné sobotné raňajky (podľa IG príspevku https://www.instagram.com/p/Df7vvUFCpr8/).
+export const breakfast = {
+  title: 'Spoločné sobotné raňajky',
+  date: '2026-11-21',
+  from: '7:00',
+  place: 'Kláry Jarunkovej 2, Banská Bystrica',
+  collab: { name: '@_tinapecie', url: 'https://www.instagram.com/_tinapecie/' },
+  intro:
+    'Tentokrát sme sa nevedeli rozhodnúť, a tak je menu nie zo štyroch, ale rovno z piatich jedál. Obľúbené jedlá dostali nové príchute a pribudli aj úplne nové.',
+  post: 'https://www.instagram.com/p/Df7vvUFCpr8/',
+  // TODO: doplniť 5 jedál z obrázkov v príspevku – { name, description, price }
+  items: [],
 }

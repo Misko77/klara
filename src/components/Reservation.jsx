@@ -38,7 +38,7 @@ function validate(form) {
 }
 
 export default function Reservation() {
-  const [form, setForm] = useState(emptyForm)
+  const [form, setForm] = useState(() => ({ ...emptyForm, date: dates.length === 1 ? dates[0] : '' }))
   const [errors, setErrors] = useState({})
   const [bookings, setBookings] = useState(loadLocalBookings) // { date, time, guests, tableIds }
   const [confirmed, setConfirmed] = useState(null)
@@ -100,7 +100,7 @@ export default function Reservation() {
         <div className="reservation__intro">
           <h2 className="section__title">{reservation.title}</h2>
           <p>
-            Raňajky rezervujeme každú sobotu. Vyberte dátum, čas a počet osôb (od {minGuests} osôb) – stôl vám pripravíme.
+            Rezervujte si miesto na spoločných sobotných raňajkách. Vyberte čas a počet osôb (od {minGuests} osôb) – stôl vám pripravíme.
           </p>
           <p className="reservation__demo">
             Ukážka formulára – rezervácia sa zatiaľ nikam neodosiela.
