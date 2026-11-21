@@ -16,6 +16,8 @@ export default function Footer() {
           <a href={site.instagram} target="_blank" rel="noreferrer">
             Instagram
           </a>
+          {' · '}
+          <a href="#/admin">Pre personál</a>
         </p>
       </div>
     </footer>

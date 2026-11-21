@@ -1,34 +1,15 @@
 import { useMemo, useState } from 'react'
 import { reservation } from '../data/content.js'
-import { allocateTables } from '../lib/tables.js'
+import {
+  formatDate,
+  loadLocalBookings,
+  saveLocalBooking,
+  slotAvailability,
+  upcomingDates,
+} from '../lib/bookings.js'
 
-// DEMO formulár: rezervácie sa držia len v pamäti prehliadača (po obnovení stránky zmiznú)
-// a nikam sa neodosielajú.
-
-const toISO = (d) => {
-  const x = new Date(d)
-  x.setMinutes(x.getMinutes() - x.getTimezoneOffset())
-  return x.toISOString().slice(0, 10)
-}
-
-const formatDate = (iso) =>
-  new Date(iso + 'T12:00:00').toLocaleDateString('sk-SK', {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
-  })
-
-// Najbližšie dni, na ktoré sa dá rezervovať (podľa reservation.weekdays), vrátane dneška.
-function upcomingDates() {
-  const out = []
-  const d = new Date()
-  d.setHours(12, 0, 0, 0)
-  while (out.length < reservation.datesAhead) {
-    if (reservation.weekdays.includes(d.getDay())) out.push(toISO(d))
-    d.setDate(d.getDate() + 1)
-  }
-  return out
-}
+// DEMO formulár: rezervácie sa ukladajú len do tohto prehliadača (localStorage)
+// a nikam sa neodosielajú. Uvidíte ich aj v ukážkovej administrácii (#/admin).
 
 const emptyForm = {
   firstName: '',
@@ -59,23 +40,16 @@ function validate(form) {
 export default function Reservation() {
   const [form, setForm] = useState(emptyForm)
   const [errors, setErrors] = useState({})
-  const [bookings, setBookings] = useState([]) // { date, time, guests, tableIds }
+  const [bookings, setBookings] = useState(loadLocalBookings) // { date, time, guests, tableIds }
   const [confirmed, setConfirmed] = useState(null)
 
   const guests = Number(form.guests)
 
   // Pre zvolený dátum: koľko miest a ktoré stoly zostávajú v každom čase.
-  const availability = useMemo(() => {
-    return reservation.slots.map((slot) => {
-      const inSlot = bookings.filter((b) => b.date === form.date && b.time === slot.time)
-      const booked = inSlot.reduce((s, b) => s + b.guests, 0)
-      const usedIds = new Set(inSlot.flatMap((b) => b.tableIds))
-      const freeTables = reservation.tables.filter((t) => !usedIds.has(t.id))
-      const remaining = slot.capacity - booked
-      const tables = guests <= remaining ? allocateTables(freeTables, guests) : null
-      return { ...slot, remaining, tables }
-    })
-  }, [bookings, form.date, guests])
+  const availability = useMemo(
+    () => slotAvailability(bookings, form.date, guests),
+    [bookings, form.date, guests],
+  )
 
   const update = (field) => (e) => {
     const value = e.target.value
@@ -93,11 +67,13 @@ export default function Reservation() {
 
     const booking = {
       ...form,
+      id: crypto.randomUUID(),
+      createdAt: new Date().toISOString(),
       guests,
       tableIds: slot.tables.map((t) => t.id),
       tables: slot.tables,
     }
-    setBookings((b) => [...b, booking])
+    setBookings(saveLocalBooking(booking))
     setConfirmed(booking)
     setForm({ ...emptyForm, date: form.date })
   }
