@@ -115,7 +115,7 @@ export const breakfast = {
     },
     {
       title: 'Slané',
-      items: [{ name: 'Toast' }, { name: 'Slané lievance s vajíčkami Benedikt' }, { name: 'Omeletka' }],
+      items: [{ name: 'Toast so šunkou od kosti a cheddarom' }, { name: 'Slané lievance s vajíčkami Benedikt' }, { name: 'Omeletka' }],
     },
   ],
 }
