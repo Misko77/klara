@@ -1,27 +1,19 @@
-import { useId } from 'react'
-
 // Line-art croissant z 9 samostatných dielov (oválov) v duchu grafiky z Instagramu.
-// Diely sú zoradené odzadu (špičky) dopredu (stred). Každý diel je maskovaný dielmi
-// pred ním, takže sa čiary neprekrývajú – funguje na akomkoľvek pozadí.
+// Susedné diely sa presne dotýkajú (vypočítané), neprekrývajú sa.
 // [cx, cy, rx, ry, rotácia]
 const SEGMENTS = [
-  [10, 46, 3, 7, -60],
-  [90, 46, 3, 7, 60],
-  [18.5, 42, 4, 10, -47],
-  [81.5, 42, 4, 10, 47],
-  [28, 37.5, 5.2, 13.5, -32],
-  [72, 37.5, 5.2, 13.5, 32],
-  [38.5, 34, 6.5, 17.5, -16],
-  [61.5, 34, 6.5, 17.5, 16],
-  [50, 32, 8.2, 21.5, 0],
+  [8.93, 53.35, 3.33, 7.76, -60],
+  [91.07, 53.35, 3.33, 7.76, 60],
+  [13.18, 46.54, 4.44, 11.09, -47],
+  [86.82, 46.54, 4.44, 11.09, 47],
+  [20.88, 39.1, 5.77, 14.97, -32],
+  [79.12, 39.1, 5.77, 14.97, 32],
+  [33.02, 32.65, 7.21, 19.41, -16],
+  [66.98, 32.65, 7.21, 19.41, 16],
+  [50, 29.65, 9.1, 23.85, 0],
 ]
 
-const Seg = ({ s: [cx, cy, rx, ry, rot], ...props }) => (
-  <ellipse cx={cx} cy={cy} rx={rx} ry={ry} transform={`rotate(${rot} ${cx} ${cy})`} {...props} />
-)
-
 export default function CroissantIcon({ size = 64, strokeWidth = 1.1, title, ...props }) {
-  const id = useId()
   return (
     <svg
       viewBox="0 0 100 64"
@@ -35,18 +27,8 @@ export default function CroissantIcon({ size = 64, strokeWidth = 1.1, title, ...
       {...props}
     >
       {title && <title>{title}</title>}
-      <defs>
-        {SEGMENTS.map((_, i) => (
-          <mask key={i} id={`${id}-${i}`} maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="84">
-            <rect x="-10" y="-10" width="120" height="84" fill="white" />
-            {SEGMENTS.slice(i + 1).map((s, j) => (
-              <Seg key={j} s={s} fill="black" stroke="black" />
-            ))}
-          </mask>
-        ))}
-      </defs>
-      {SEGMENTS.map((s, i) => (
-        <Seg key={i} s={s} mask={`url(#${id}-${i})`} />
+      {SEGMENTS.map(([cx, cy, rx, ry, rot]) => (
+        <ellipse key={`${cx}-${cy}`} cx={cx} cy={cy} rx={rx} ry={ry} transform={`rotate(${rot} ${cx} ${cy})`} />
       ))}
     </svg>
   )
