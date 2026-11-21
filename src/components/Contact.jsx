@@ -53,7 +53,7 @@ export default function Contact() {
           </div>
 
           <div className="contact__block">
-            <h3>Sledujte nás</h3>
+            <h3>Kontaktujte nás</h3>
             <p>
               {contact.phone && (
                 <>

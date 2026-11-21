@@ -1,5 +1,5 @@
 // Všetok obsah webu na jednom mieste.
-// Adresa a poloha sú z Google Maps. TODO: otváracie hodiny, telefón, skutočné menu a ceny.
+// Adresa a poloha sú z Google Maps. TODO: otváracie hodiny, skutočné menu a ceny.
 
 export const site = {
   name: 'Klára',
@@ -56,8 +56,8 @@ export const contact = {
   title: 'Kontakt',
   name: 'KLÁRA kaviareň s pekárňou',
   address: ['Kláry Jarunkovej 14489/2', 'Banská Bystrica'],
-  // Údaje z Google Maps (zatiaľ bez telefónu/e-mailu). Prázdne pole sa na webe nezobrazí.
-  phone: '',
+  // Údaje z Google Maps (zatiaľ bez e-mailu). Prázdne pole sa na webe nezobrazí.
+  phone: '+421 904 047 022',
   email: '',
   // TODO: doplniť otváracie hodiny – kým je pole prázdne, web odkazuje na Google Maps.
   hours: [],
