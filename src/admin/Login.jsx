@@ -20,7 +20,7 @@ export default function Login({ onLogin }) {
     <div className="login">
       <form className="login__card" onSubmit={submit}>
         <div className="login__logo">
-          <CroissantIcon size={72} strokeWidth={1.4} />
+          <CroissantIcon size={72} strokeWidth={1} />
           <span>Klára</span>
         </div>
         <h1>Prihlásenie pre majiteľku</h1>

@@ -13,7 +13,7 @@ export default function About() {
         </div>
         {/* TODO: nahradiť skutočnou fotkou (napr. <img src="/foto.jpg" alt="..." />) */}
         <div className="about__photo" role="img" aria-label="Miesto pre fotku kaviarne">
-          <CroissantIcon size={120} strokeWidth={1.2} />
+          <CroissantIcon size={120} strokeWidth={0.9} />
           <span>fotka čoskoro</span>
         </div>
       </div>

@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section id="top" className="hero">
       <div className="container hero__inner">
-        <CroissantIcon size={180} strokeWidth={1.2} className="hero__icon" />
+        <CroissantIcon size={180} strokeWidth={0.8} className="hero__icon" />
         <p className="hero__eyebrow">
           {site.name} · {site.tagline}
         </p>
