@@ -1,5 +1,5 @@
 // Všetok obsah webu na jednom mieste.
-// Adresa a poloha sú z Google Maps. TODO: otváracie hodiny, skutočné menu a ceny.
+// Adresa a poloha sú z Google Maps. TODO: skutočné menu a ceny.
 
 export const site = {
   name: 'Klára',
@@ -59,8 +59,12 @@ export const contact = {
   // Údaje z Google Maps (zatiaľ bez e-mailu). Prázdne pole sa na webe nezobrazí.
   phone: '+421 904 047 022',
   email: '',
-  // TODO: doplniť otváracie hodiny – kým je pole prázdne, web odkazuje na Google Maps.
-  hours: [],
+  // Otváracie hodiny (podľa Google Maps). Prázdne pole = web odkáže na Google Maps.
+  hours: [
+    { days: 'Pondelok – Piatok', time: '7:00 – 17:00' },
+    { days: 'Sobota', time: '7:00 – 15:00' },
+    { days: 'Nedeľa', time: 'zatvorené' },
+  ],
   mapsUrl: 
     'https://www.google.com/maps/place/KL%C3%81RA+kaviare%C5%88+s+pek%C3%A1r%C5%88ou/@48.7383359,19.1297784,18z/data=!4m6!3m5!1s0x47153da65874ea19:0xe4ea48b16d9add50!8m2!3d48.7383359!4d19.1297784!16s%2Fg%2F11z0ph1dt3',
   // Súradnice prevádzky z Google Maps
