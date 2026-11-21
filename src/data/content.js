@@ -67,3 +67,28 @@ export const contact = {
   lat: 48.7383359,
   lng: 19.1297784,
 }
+
+// Rezervácia raňajok (DEMO – zatiaľ sa nikam neodosiela).
+export const reservation = {
+  title: 'Rezervácia raňajok',
+  // Začiatky raňajok; každý čas má vlastnú kapacitu osôb. TODO: potvrdiť časy.
+  slots: [
+    { time: '7:00', capacity: 8 },
+    { time: '7:30', capacity: 8 },
+    { time: '8:00', capacity: 8 },
+    { time: '9:00', capacity: 8 },
+    { time: '9:30', capacity: 8 },
+    { time: '10:00', capacity: 8 },
+  ],
+  // Stoly v kaviarni (počet miest pri stole).
+  tables: [
+    { id: 'A1', seats: 4 },
+    { id: 'A2', seats: 4 },
+    { id: 'A3', seats: 4 },
+    { id: 'B1', seats: 3 },
+    { id: 'C1', seats: 2 },
+    { id: 'C2', seats: 2 },
+    { id: 'C3', seats: 2 },
+    { id: 'C4', seats: 2 },
+  ],
+}

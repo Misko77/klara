@@ -463,3 +463,186 @@ img {
     scroll-behavior: auto;
   }
 }
+
+/* ===== Rezervácia ===== */
+.reservation {
+  display: grid;
+  gap: 40px;
+}
+
+@media (min-width: 960px) {
+  .reservation {
+    grid-template-columns: 1fr 1.5fr;
+    align-items: start;
+  }
+}
+
+.reservation__demo {
+  font-size: 0.85rem;
+  color: var(--c-muted);
+  font-style: italic;
+}
+
+.reservation__done {
+  margin-top: 24px;
+  padding: 20px 22px;
+  border-radius: var(--radius);
+  background: var(--c-cream);
+  border-left: 4px solid var(--c-brand);
+}
+
+.reservation__done h3 {
+  color: var(--c-brand);
+  font-size: 1.4rem;
+}
+
+.reservation__done p {
+  margin: 0 0 8px;
+}
+
+.reservation__form {
+  display: grid;
+  gap: 18px 20px;
+  background: #fff;
+  padding: 28px;
+  border-radius: var(--radius);
+  border: 1px solid rgb(131 63 42 / 0.15);
+}
+
+@media (min-width: 600px) {
+  .reservation__form {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.field--full {
+  grid-column: 1 / -1;
+}
+
+.field label,
+.field legend {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.field input,
+.field select {
+  font: inherit;
+  color: var(--c-text);
+  padding: 11px 14px;
+  border: 1px solid rgb(131 63 42 / 0.3);
+  border-radius: 10px;
+  background: var(--c-cream-light);
+  width: 100%;
+}
+
+.field input:focus,
+.field select:focus {
+  outline: 2px solid var(--c-brand);
+  outline-offset: 1px;
+  border-color: var(--c-brand);
+}
+
+.field input[aria-invalid='true'] {
+  border-color: #b3261e;
+}
+
+.field__error {
+  color: #b3261e;
+  font-size: 0.85rem;
+}
+
+.slots {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.slots legend {
+  margin-bottom: 8px;
+}
+
+.slots__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.slot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px 6px;
+  border: 1px solid rgb(131 63 42 / 0.3);
+  border-radius: 10px;
+  cursor: pointer;
+  background: var(--c-cream-light);
+  transition: background 0.15s, color 0.15s;
+}
+
+.slot input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.slot__time {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  line-height: 1.2;
+}
+
+.slot__info {
+  font-size: 0.75rem;
+  color: var(--c-muted);
+}
+
+.slot:has(input:checked) {
+  background: var(--c-brand);
+  border-color: var(--c-brand);
+  color: var(--c-cream);
+}
+
+.slot:has(input:checked) .slot__info {
+  color: var(--c-cream);
+}
+
+.slot:has(input:focus-visible) {
+  outline: 2px solid var(--c-brand);
+  outline-offset: 2px;
+}
+
+.slot--disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.btn--brand {
+  background: var(--c-brand);
+  border-color: var(--c-brand);
+  color: var(--c-cream);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn--brand:hover {
+  background: var(--c-brand-dark);
+}
+
+.section--cream {
+  background: var(--c-cream);
+}
+
+.section--cream .reservation__done {
+  background: var(--c-cream-light);
+}

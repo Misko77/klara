@@ -15,8 +15,8 @@ export default function Hero() {
           <a href="#menu" className="btn btn--light">
             Pozrieť menu
           </a>
-          <a href="#kontakt" className="btn btn--outline">
-            Kde nás nájdete
+          <a href="#rezervacia" className="btn btn--outline">
+            Rezervovať raňajky
           </a>
         </div>
       </div>

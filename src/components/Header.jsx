@@ -5,6 +5,7 @@ import { site } from '../data/content.js'
 const links = [
   { href: '#o-nas', label: 'O nás' },
   { href: '#menu', label: 'Menu' },
+  { href: '#rezervacia', label: 'Rezervácia' },
   { href: '#kontakt', label: 'Kontakt' },
 ]
 
