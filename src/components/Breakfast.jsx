@@ -2,7 +2,7 @@ import { breakfast } from '../data/content.js'
 import { formatDate } from '../lib/bookings.js'
 
 export default function Breakfast() {
-  const { items } = breakfast
+  const groups = breakfast.groups.filter((g) => g.items.length > 0)
 
   return (
     <section id="ranajky" className="section section--light">
@@ -19,24 +19,28 @@ export default function Breakfast() {
           .
         </p>
 
-        {items.length > 0 ? (
-          <ol className="breakfast__list">
-            {items.map((item, i) => (
-              <li key={item.name} className="breakfast__item">
-                <span className="breakfast__num">{i + 1}</span>
-                <div>
-                  <div className="breakfast__head">
-                    <h3>{item.name}</h3>
-                    {item.price && <span className="breakfast__price">{item.price}</span>}
-                  </div>
-                  {item.description && <p>{item.description}</p>}
-                </div>
-              </li>
+        {groups.length > 0 ? (
+          <div className="breakfast__groups">
+            {groups.map((group) => (
+              <div key={group.title} className="breakfast__group">
+                <h3 className="breakfast__group-title">{group.title}</h3>
+                <ul className="breakfast__list">
+                  {group.items.map((item) => (
+                    <li key={item.name} className="breakfast__item">
+                      <div className="breakfast__head">
+                        <span className="breakfast__name">{item.name}</span>
+                        {item.price && <span className="breakfast__price">{item.price}</span>}
+                      </div>
+                      {item.description && <p>{item.description}</p>}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ))}
-          </ol>
+          </div>
         ) : (
           <p className="breakfast__soon">
-            Menu z piatich jedál nájdete v našom{' '}
+            Menu nájdete v našom{' '}
             <a href={breakfast.post} target="_blank" rel="noreferrer">
               príspevku na Instagrame
             </a>

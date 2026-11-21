@@ -670,40 +670,47 @@ img {
   color: var(--c-brand);
 }
 
-.breakfast__list {
-  list-style: none;
-  margin: 0 0 36px;
-  padding: 0;
+.breakfast__groups {
   display: grid;
-  gap: 14px;
+  gap: 20px;
+  margin: 0 0 36px;
   text-align: left;
 }
 
-.breakfast__item {
-  display: flex;
-  gap: 18px;
-  align-items: flex-start;
+@media (min-width: 720px) {
+  .breakfast__groups {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.breakfast__group {
   background: #fff;
   border: 1px solid rgb(131 63 42 / 0.15);
   border-radius: var(--radius);
-  padding: 18px 20px;
+  padding: 24px 26px;
 }
 
-.breakfast__num {
-  flex: 0 0 auto;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: var(--c-brand);
-  color: var(--c-cream);
-  font-family: var(--font-display);
-  font-size: 1.2rem;
+.breakfast__group-title {
+  font-size: 1.6rem;
+  color: var(--c-brand);
+  margin: 0 0 8px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgb(131 63 42 / 0.15);
 }
 
-.breakfast__item > div {
-  flex: 1;
+.breakfast__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.breakfast__item {
+  padding: 12px 0;
+  border-bottom: 1px dotted rgb(131 63 42 / 0.25);
+}
+
+.breakfast__item:last-child {
+  border-bottom: 0;
 }
 
 .breakfast__head {
@@ -713,10 +720,10 @@ img {
   align-items: baseline;
 }
 
-.breakfast__head h3 {
-  font-size: 1.35rem;
-  color: var(--c-brand);
-  margin: 0 0 4px;
+.breakfast__name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  line-height: 1.25;
 }
 
 .breakfast__price {
@@ -725,7 +732,7 @@ img {
 }
 
 .breakfast__item p {
-  margin: 0;
+  margin: 4px 0 0;
   color: var(--c-muted);
 }
 

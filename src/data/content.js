@@ -107,6 +107,15 @@ export const breakfast = {
   intro:
     'Tentokrát sme sa nevedeli rozhodnúť, a tak je menu nie zo štyroch, ale rovno z piatich jedál. Obľúbené jedlá dostali nové príchute a pribudli aj úplne nové.',
   post: 'https://www.instagram.com/p/Df7vvUFCpr8/',
-  // TODO: doplniť 5 jedál z obrázkov v príspevku – { name, description, price }
-  items: [],
+  // Jedlá rozdelené na sladké a slané. Voliteľne: description, price. TODO: popisy a ceny
+  groups: [
+    {
+      title: 'Sladké',
+      items: [{ name: 'Šodó buchtičky' }, { name: 'Honey butter toast' }],
+    },
+    {
+      title: 'Slané',
+      items: [{ name: 'Toast' }, { name: 'Slané lievance s vajíčkami Benedikt' }, { name: 'Omeletka' }],
+    },
+  ],
 }
