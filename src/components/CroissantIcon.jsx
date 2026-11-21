@@ -1,21 +1,27 @@
 import { useId } from 'react'
 
-// Line-art croissant ako polmesiac, ku krajom sa mierne zužuje.
-// Farba čiar = currentColor. Záhyby cesta sú orezané obrysom (clipPath),
-// takže vždy presne dosadnú na okraj.
-const CROISSANT_OUTLINE =
-  'M6.6 39.8 A5.7 5.7 0 0 0 13.7 48.7 L16.1 47.8 L18.3 47 L20.6 46.3 L22.7 45.6 L24.9 45.1 L26.9 44.6 L28.9 44.3 L30.9 43.9 L32.8 43.7 L34.6 43.5 L36.4 43.3 L38 43.2 L39.7 43.1 L41.3 43.1 L42.8 43 L44.3 43 L45.8 43 L47.2 43 L48.6 43 L50 43 L51.4 43 L52.8 43 L54.2 43 L55.7 43 L57.2 43 L58.7 43.1 L60.3 43.1 L62 43.2 L63.6 43.3 L65.4 43.5 L67.2 43.7 L69.1 43.9 L71.1 44.3 L73.1 44.6 L75.1 45.1 L77.3 45.6 L79.4 46.3 L81.7 47 L83.9 47.8 L86.3 48.7 A5.7 5.7 0 0 0 93.4 39.8 L91.7 37.6 L89.9 35.5 L88.1 33.5 L86.3 31.6 L84.4 29.7 L82.4 27.9 L80.4 26.2 L78.4 24.6 L76.3 23.1 L74.1 21.7 L71.9 20.4 L69.6 19.2 L67.3 18.1 L64.9 17.2 L62.5 16.4 L60.1 15.7 L57.6 15.2 L55.1 14.8 L52.5 14.6 L50 14.5 L47.5 14.6 L44.9 14.8 L42.4 15.2 L39.9 15.7 L37.5 16.4 L35.1 17.2 L32.7 18.1 L30.4 19.2 L28.1 20.4 L25.9 21.7 L23.7 23.1 L21.6 24.6 L19.6 26.2 L17.6 27.9 L15.6 29.7 L13.7 31.6 L11.9 33.5 L10.1 35.5 L8.3 37.6 L6.6 39.8 Z'
-
-const CROISSANT_FOLDS = [
-  'M33.8 50 Q21.5 35.9 18.2 17.5',
-  'M43.7 51.3 Q33.9 30.3 33.9 7.2',
-  'M50 52 Q50 28 50 4',
-  'M56.3 51.3 Q66.1 30.3 66.1 7.2',
-  'M66.2 50 Q78.5 35.9 81.8 17.5',
+// Line-art croissant z 9 samostatných dielov (oválov) v duchu grafiky z Instagramu.
+// Diely sú zoradené odzadu (špičky) dopredu (stred). Každý diel je maskovaný dielmi
+// pred ním, takže sa čiary neprekrývajú – funguje na akomkoľvek pozadí.
+// [cx, cy, rx, ry, rotácia]
+const SEGMENTS = [
+  [10, 46, 3, 7, -60],
+  [90, 46, 3, 7, 60],
+  [18.5, 42, 4, 10, -47],
+  [81.5, 42, 4, 10, 47],
+  [28, 37.5, 5.2, 13.5, -32],
+  [72, 37.5, 5.2, 13.5, 32],
+  [38.5, 34, 6.5, 17.5, -16],
+  [61.5, 34, 6.5, 17.5, 16],
+  [50, 32, 8.2, 21.5, 0],
 ]
 
+const Seg = ({ s: [cx, cy, rx, ry, rot], ...props }) => (
+  <ellipse cx={cx} cy={cy} rx={rx} ry={ry} transform={`rotate(${rot} ${cx} ${cy})`} {...props} />
+)
+
 export default function CroissantIcon({ size = 64, strokeWidth = 1.1, title, ...props }) {
-  const clipId = useId()
+  const id = useId()
   return (
     <svg
       viewBox="0 0 100 64"
@@ -24,24 +30,24 @@ export default function CroissantIcon({ size = 64, strokeWidth = 1.1, title, ...
       fill="none"
       stroke="currentColor"
       strokeWidth={strokeWidth}
-      strokeLinecap="round"
-      strokeLinejoin="round"
       role={title ? 'img' : undefined}
       aria-hidden={title ? undefined : true}
       {...props}
     >
       {title && <title>{title}</title>}
       <defs>
-        <clipPath id={clipId}>
-          <path d={CROISSANT_OUTLINE} />
-        </clipPath>
-      </defs>
-      <g clipPath={`url(#${clipId})`}>
-        {CROISSANT_FOLDS.map((d) => (
-          <path key={d} d={d} />
+        {SEGMENTS.map((_, i) => (
+          <mask key={i} id={`${id}-${i}`} maskUnits="userSpaceOnUse" x="-10" y="-10" width="120" height="84">
+            <rect x="-10" y="-10" width="120" height="84" fill="white" />
+            {SEGMENTS.slice(i + 1).map((s, j) => (
+              <Seg key={j} s={s} fill="black" stroke="black" />
+            ))}
+          </mask>
         ))}
-      </g>
-      <path d={CROISSANT_OUTLINE} />
+      </defs>
+      {SEGMENTS.map((s, i) => (
+        <Seg key={i} s={s} mask={`url(#${id}-${i})`} />
+      ))}
     </svg>
   )
 }
