@@ -5,10 +5,29 @@ import { allocateTables } from '../lib/tables.js'
 // DEMO formulár: rezervácie sa držia len v pamäti prehliadača (po obnovení stránky zmiznú)
 // a nikam sa neodosielajú.
 
-const todayISO = () => {
+const toISO = (d) => {
+  const x = new Date(d)
+  x.setMinutes(x.getMinutes() - x.getTimezoneOffset())
+  return x.toISOString().slice(0, 10)
+}
+
+const formatDate = (iso) =>
+  new Date(iso + 'T12:00:00').toLocaleDateString('sk-SK', {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+  })
+
+// Najbližšie dni, na ktoré sa dá rezervovať (podľa reservation.weekdays), vrátane dneška.
+function upcomingDates() {
+  const out = []
   const d = new Date()
-  d.setMinutes(d.getMinutes() - d.getTimezoneOffset())
-  return d.toISOString().slice(0, 10)
+  d.setHours(12, 0, 0, 0)
+  while (out.length < reservation.datesAhead) {
+    if (reservation.weekdays.includes(d.getDay())) out.push(toISO(d))
+    d.setDate(d.getDate() + 1)
+  }
+  return out
 }
 
 const emptyForm = {
@@ -24,6 +43,8 @@ const emptyForm = {
 const { minGuests } = reservation
 const maxGuests = Math.max(...reservation.slots.map((s) => s.capacity))
 
+const dates = upcomingDates()
+
 function validate(form) {
   const e = {}
   if (!form.firstName.trim()) e.firstName = 'Vyplňte meno.'
@@ -31,7 +52,6 @@ function validate(form) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) e.email = 'Zadajte platný e-mail.'
   if (!/^\+?[0-9 ]{9,15}$/.test(form.phone.trim())) e.phone = 'Zadajte platné telefónne číslo.'
   if (!form.date) e.date = 'Vyberte dátum.'
-  else if (form.date < todayISO()) e.date = 'Dátum nemôže byť v minulosti.'
   if (!form.time) e.time = 'Vyberte čas raňajok.'
   return e
 }
@@ -104,7 +124,7 @@ export default function Reservation() {
         <div className="reservation__intro">
           <h2 className="section__title">{reservation.title}</h2>
           <p>
-            Rezervujte si stôl na raňajky. Vyberte dátum, čas a počet osôb (od {minGuests} osôb) – stôl vám pripravíme.
+            Raňajky rezervujeme každú sobotu. Vyberte dátum, čas a počet osôb (od {minGuests} osôb) – stôl vám pripravíme.
           </p>
           <p className="reservation__demo">
             Ukážka formulára – rezervácia sa zatiaľ nikam neodosiela.
@@ -114,7 +134,7 @@ export default function Reservation() {
             <div className="reservation__done" role="status">
               <h3>Ďakujeme, {confirmed.firstName}!</h3>
               <p>
-                Rezervácia na <strong>{new Date(confirmed.date).toLocaleDateString('sk-SK')}</strong> o{' '}
+                Rezervácia na <strong>{formatDate(confirmed.date)}</strong> o{' '}
                 <strong>{confirmed.time}</strong> pre <strong>{confirmed.guests}</strong>{' '}
                 {confirmed.guests === 1 ? 'osobu' : confirmed.guests < 5 ? 'osoby' : 'osôb'}.
                 <br />
@@ -148,7 +168,14 @@ export default function Reservation() {
           </div>
           <div className="field">
             <label htmlFor="res-date">Dátum</label>
-            <input type="date" min={todayISO()} {...fieldProps('date')} />
+            <select {...fieldProps('date')}>
+              <option value="">Vyberte sobotu</option>
+              {dates.map((d) => (
+                <option key={d} value={d}>
+                  {formatDate(d)}
+                </option>
+              ))}
+            </select>
             {err('date')}
           </div>
           <div className="field">
