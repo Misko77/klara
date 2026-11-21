@@ -1,0 +1,465 @@
+/* ===== Téma Klára – farby z Instagramu @klara_bystrica ===== */
+:root {
+  --c-brand: #833f2a;       /* terakota – hlavná farba */
+  --c-brand-dark: #5a2a1b;  /* espresso – päta, hover */
+  --c-cream: #f3d8ad;       /* krémová – text/čiary na tmavom */
+  --c-cream-light: #fbf3e6; /* svetlá smotana – pozadie svetlých sekcií */
+  --c-text: #3b2118;        /* text na svetlom */
+  --c-muted: #7a5546;
+
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'Work Sans', system-ui, sans-serif;
+
+  --container: 1120px;
+  --radius: 14px;
+  --header-h: 72px;
+}
+
+/* ===== Base ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-h);
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--c-text);
+  background: var(--c-cream-light);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+}
+
+a {
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ===== Header ===== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: var(--header-h);
+  background: var(--c-brand);
+  color: var(--c-cream);
+  --croissant-fill: var(--c-brand);
+  box-shadow: 0 1px 0 rgb(0 0 0 / 0.15);
+}
+
+.header__inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  text-decoration: none;
+  color: var(--c-cream);
+}
+
+.logo--small {
+  font-size: 1.35rem;
+}
+
+.nav {
+  display: flex;
+  gap: 32px;
+}
+
+.nav a {
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 6px 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.nav a:hover,
+.nav a:focus-visible {
+  border-color: var(--c-cream);
+}
+
+.header__toggle {
+  display: none;
+  background: none;
+  border: 0;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.header__toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  margin: 5px 0;
+  background: var(--c-cream);
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.header__toggle[aria-expanded='true'] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.header__toggle[aria-expanded='true'] span:nth-child(2) {
+  opacity: 0;
+}
+.header__toggle[aria-expanded='true'] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+@media (max-width: 720px) {
+  .header__toggle {
+    display: block;
+  }
+
+  .nav {
+    position: absolute;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: var(--c-brand);
+    padding: 8px 20px 20px;
+    border-top: 1px solid rgb(243 216 173 / 0.2);
+    display: none;
+  }
+
+  .nav--open {
+    display: flex;
+  }
+
+  .nav a {
+    padding: 14px 0;
+    border-bottom: 1px solid rgb(243 216 173 / 0.15);
+  }
+}
+
+/* ===== Hero ===== */
+.hero {
+  background: var(--c-brand);
+  color: var(--c-cream);
+  --croissant-fill: var(--c-brand);
+  text-align: center;
+  padding: 72px 0 96px;
+}
+
+.hero__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero__icon {
+  max-width: 60%;
+  height: auto;
+  margin-bottom: 28px;
+}
+
+.hero__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.85rem;
+  margin: 0 0 16px;
+  opacity: 0.85;
+}
+
+.hero__title {
+  font-size: clamp(2.4rem, 7vw, 4.5rem);
+  max-width: 14ch;
+}
+
+.hero__text {
+  max-width: 36rem;
+  margin: 0 0 32px;
+  opacity: 0.9;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+}
+
+/* ===== Buttons ===== */
+.btn {
+  display: inline-block;
+  padding: 13px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border: 1.5px solid var(--c-cream);
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn--light {
+  background: var(--c-cream);
+  color: var(--c-brand);
+}
+
+.btn--light:hover {
+  background: var(--c-cream-light);
+}
+
+.btn--outline {
+  color: var(--c-cream);
+}
+
+.btn--outline:hover {
+  background: var(--c-cream);
+  color: var(--c-brand);
+}
+
+/* ===== Sections ===== */
+.section {
+  padding: 88px 0;
+}
+
+.section--light {
+  background: var(--c-cream-light);
+  --croissant-fill: var(--c-cream-light);
+}
+
+.section--brand {
+  background: var(--c-brand);
+  color: var(--c-cream);
+}
+
+.section__title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: var(--c-brand);
+}
+
+.section--brand .section__title {
+  color: var(--c-cream);
+}
+
+.section__title--center,
+.section__lead {
+  text-align: center;
+}
+
+.section__lead {
+  max-width: 34rem;
+  margin: 0 auto 48px;
+  opacity: 0.85;
+}
+
+/* ===== O nás ===== */
+.about {
+  display: grid;
+  gap: 48px;
+  align-items: center;
+}
+
+.about__photo {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius);
+  background: var(--c-cream);
+  color: var(--c-brand);
+  --croissant-fill: var(--c-cream);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 860px) {
+  .about {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ===== Menu ===== */
+.menu {
+  display: grid;
+  gap: 24px;
+}
+
+@media (min-width: 860px) {
+  .menu {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.menu__card {
+  border: 1px solid rgb(243 216 173 / 0.35);
+  border-radius: var(--radius);
+  padding: 28px 26px;
+}
+
+.menu__category {
+  font-size: 1.6rem;
+  margin-bottom: 18px;
+}
+
+.menu__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu__item {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 7px 0;
+}
+
+.menu__dots {
+  flex: 1;
+  border-bottom: 1px dotted rgb(243 216 173 / 0.5);
+  transform: translateY(-4px);
+}
+
+.menu__price {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ===== Kontakt ===== */
+.contact {
+  display: grid;
+  gap: 48px;
+}
+
+@media (min-width: 860px) {
+  .contact {
+    grid-template-columns: 1fr 1.2fr;
+    align-items: stretch;
+  }
+}
+
+.contact__block {
+  margin-bottom: 28px;
+}
+
+.contact__block h3 {
+  font-size: 1.3rem;
+  color: var(--c-brand);
+  margin-bottom: 6px;
+}
+
+.contact__block address {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+}
+
+.contact__block p {
+  margin: 0;
+}
+
+.contact__block a {
+  color: var(--c-brand);
+  text-underline-offset: 3px;
+}
+
+.hours {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 340px;
+}
+
+.hours th,
+.hours td {
+  padding: 4px 0;
+  text-align: left;
+  font-weight: 400;
+}
+
+.hours td {
+  text-align: right;
+  font-weight: 500;
+}
+
+.contact__map {
+  min-height: 340px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid rgb(131 63 42 / 0.2);
+}
+
+.contact__map iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  border: 0;
+  display: block;
+}
+
+/* ===== Footer ===== */
+.footer {
+  background: var(--c-brand-dark);
+  color: var(--c-cream);
+  --croissant-fill: var(--c-brand-dark);
+  padding: 32px 0;
+  font-size: 0.9rem;
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer p {
+  margin: 0;
+  opacity: 0.85;
+}
+
+/* ===== Accessibility ===== */
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
