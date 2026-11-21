@@ -70,7 +70,6 @@ img {
   height: var(--header-h);
   background: var(--c-brand);
   color: var(--c-cream);
-  --croissant-fill: var(--c-brand);
   box-shadow: 0 1px 0 rgb(0 0 0 / 0.15);
 }
 
@@ -175,7 +174,6 @@ img {
 .hero {
   background: var(--c-brand);
   color: var(--c-cream);
-  --croissant-fill: var(--c-brand);
   text-align: center;
   padding: 72px 0 96px;
 }
@@ -255,7 +253,6 @@ img {
 
 .section--light {
   background: var(--c-cream-light);
-  --croissant-fill: var(--c-cream-light);
 }
 
 .section--brand {
@@ -295,7 +292,6 @@ img {
   border-radius: var(--radius);
   background: var(--c-cream);
   color: var(--c-brand);
-  --croissant-fill: var(--c-cream);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -434,7 +430,6 @@ img {
 .footer {
   background: var(--c-brand-dark);
   color: var(--c-cream);
-  --croissant-fill: var(--c-brand-dark);
   padding: 32px 0;
   font-size: 0.9rem;
 }

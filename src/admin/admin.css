@@ -28,7 +28,6 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
-  --croissant-fill: var(--c-cream-light);
 }
 
 .login__logo {
@@ -70,7 +69,6 @@
 .adm-header {
   background: var(--c-brand);
   color: var(--c-cream);
-  --croissant-fill: var(--c-brand);
   position: sticky;
   top: 0;
   z-index: 5;
